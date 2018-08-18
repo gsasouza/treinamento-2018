@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Users Create Should create a user 1`] = `
+Object {
+  "message": "Usuário criado!",
+  "user": Object {
+    "__v": 0,
+    "_id": "ObjectId",
+    "name": "name",
+    "username": "TEST",
+  },
+}
+`;
+
+exports[`Users Create Should not create a user with the same username 1`] = `
+Object {
+  "error": Object {
+    "code": 11000,
+    "driver": true,
+    "errmsg": "E11000 duplicate key error collection: treinamento.users index: username_1 dup key: { : \\"TEST\\" }",
+    "index": 0,
+    "message": "E11000 duplicate key error collection: treinamento.users index: username_1 dup key: { : \\"TEST\\" }",
+    "name": "MongoError",
+  },
+  "message": "Deu erro!",
+}
+`;
+
+exports[`Users Create Should not create a without username 1`] = `
+Object {
+  "error": Object {
+    "errors": Array [
+      "username is a required field",
+    ],
+    "inner": Array [],
+    "message": "username is a required field",
+    "name": "ValidationError",
+    "params": Object {
+      "path": "username",
+    },
+    "path": "username",
+    "type": "required",
+    "value": Object {
+      "name": "name",
+    },
+  },
+  "message": "Deu erro!",
+}
+`;
+
+exports[`Users Find Should find a user 1`] = `
+Object {
+  "message": "Usuario encontrados",
+  "user": Object {
+    "__v": 0,
+    "_id": "ObjectId",
+    "name": "name",
+    "username": "TEST2",
+  },
+}
+`;

@@ -1,17 +1,20 @@
 const User = require('../models/userModel');
+const UserSchema = require('../models/userSchema');
 
 const create = async (req, res) => {
   try {
     const { username, password, name } = req.body;
+    await UserSchema.validate(req.body);
+
     const user = new User({
       username,
       password,
       name,
     });
     await user.save();
-    return res.json({ message: 'Usuário criado!', user });
+    return res.status(201).json({ message: 'Usuário criado!', user });
   } catch (error) {
-    return res.json({ message: 'Deu erro!', error })
+    return res.status(500).json({ message: 'Deu erro!', error })
   }
 };
 
@@ -28,10 +31,10 @@ const findOne = async (req, res) => {
   try {
     const { username } = req.params;
     const user = await User.findOne({ username: username.toUpperCase() });
-    if (!user) return res.json({ message: 'Usuário não encontrado' });
-    return res.json({ message: 'Usuario encontrados', user });
+    if (!user) return res.status(404).json({ message: 'Usuário não encontrado' });
+    return res.status(200).json({ message: 'Usuario encontrados', user });
   } catch (error) {
-    return res.json({ message: 'Deu erro!', error })
+    return res.status(500).json({ message: 'Deu erro!', error })
   }
 };
 
